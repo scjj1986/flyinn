@@ -1,0 +1,89 @@
+c:\users\josmer.martinez\documents\visual studio 2010\Projects\Librerias\Librerias\bin\Debug\Librerias.dll
+c:\users\josmer.martinez\documents\visual studio 2010\Projects\Librerias\Librerias\bin\Debug\Librerias.pdb
+c:\users\josmer.martinez\documents\visual studio 2010\Projects\Librerias\Librerias\obj\Debug\Librerias.dll
+c:\users\josmer.martinez\documents\visual studio 2010\Projects\Librerias\Librerias\obj\Debug\Librerias.pdb
+\\wsiscsis008\c$\Users\josmer.martinez\Documents\Visual Studio 2010\Projects\Librerias\Librerias\bin\Debug\Librerias.dll
+\\wsiscsis008\c$\Users\josmer.martinez\Documents\Visual Studio 2010\Projects\Librerias\Librerias\bin\Debug\Librerias.pdb
+\\wsiscsis008\c$\Users\josmer.martinez\Documents\Visual Studio 2010\Projects\Librerias\Librerias\obj\Debug\Librerias.dll
+\\wsiscsis008\c$\Users\josmer.martinez\Documents\Visual Studio 2010\Projects\Librerias\Librerias\obj\Debug\Librerias.pdb
+\\192.168.122.58\c$\Users\josmer.martinez\Documents\Visual Studio 2010\Projects\Librerias\Librerias\bin\Debug\Librerias.dll
+\\192.168.122.58\c$\Users\josmer.martinez\Documents\Visual Studio 2010\Projects\Librerias\Librerias\bin\Debug\Librerias.pdb
+\\192.168.122.58\c$\Users\josmer.martinez\Documents\Visual Studio 2010\Projects\Librerias\Librerias\obj\Debug\Librerias.csprojResolveAssemblyReference.cache
+\\192.168.122.58\c$\Users\josmer.martinez\Documents\Visual Studio 2010\Projects\Librerias\Librerias\obj\Debug\Librerias.dll
+\\192.168.122.58\c$\Users\josmer.martinez\Documents\Visual Studio 2010\Projects\Librerias\Librerias\obj\Debug\Librerias.pdb
+C:\Users\rafael.rodriguez\Documents\Visual Studio 2010\Projects\WcfAuthenticathionSunsol\Librerias\Librerias\bin\Debug\Librerias.dll
+C:\Users\rafael.rodriguez\Documents\Visual Studio 2010\Projects\WcfAuthenticathionSunsol\Librerias\Librerias\bin\Debug\Librerias.pdb
+C:\Users\rafael.rodriguez\Documents\Visual Studio 2010\Projects\WcfAuthenticathionSunsol\Librerias\Librerias\obj\Debug\Librerias.dll
+C:\Users\rafael.rodriguez\Documents\Visual Studio 2010\Projects\WcfAuthenticathionSunsol\Librerias\Librerias\obj\Debug\Librerias.pdb
+C:\Users\rafael.rodriguez\Documents\Visual Studio 2010\Projects\WcfAuthenticathionSunsol\Librerias\Librerias\obj\Debug\Librerias.csprojResolveAssemblyReference.cache
+G:\WcfAuthenticathionSunsol\Librerias\Librerias\bin\Debug\Librerias.dll
+G:\WcfAuthenticathionSunsol\Librerias\Librerias\bin\Debug\Librerias.pdb
+G:\WcfAuthenticathionSunsol\Librerias\Librerias\obj\Debug\Librerias.csprojResolveAssemblyReference.cache
+G:\WcfAuthenticathionSunsol\Librerias\Librerias\obj\Debug\Librerias.dll
+G:\WcfAuthenticathionSunsol\Librerias\Librerias\obj\Debug\Librerias.pdb
+D:\Files Rafael Angel\Aplicaciones Desarrollo\WcfAuthenticathionSunsol\Librerias\Librerias\bin\Debug\Librerias.dll
+D:\Files Rafael Angel\Aplicaciones Desarrollo\WcfAuthenticathionSunsol\Librerias\Librerias\bin\Debug\Librerias.pdb
+D:\Files Rafael Angel\Aplicaciones Desarrollo\WcfAuthenticathionSunsol\Librerias\Librerias\obj\Debug\Librerias.csprojResolveAssemblyReference.cache
+D:\Files Rafael Angel\Aplicaciones Desarrollo\WcfAuthenticathionSunsol\Librerias\Librerias\obj\Debug\Librerias.dll
+D:\Files Rafael Angel\Aplicaciones Desarrollo\WcfAuthenticathionSunsol\Librerias\Librerias\obj\Debug\Librerias.pdb
+C:\WcfRCIService\Librerias\Librerias\bin\Debug\Librerias.dll
+C:\WcfRCIService\Librerias\Librerias\bin\Debug\Librerias.pdb
+C:\WcfRCIService\Librerias\Librerias\obj\Debug\Librerias.csprojResolveAssemblyReference.cache
+C:\WcfRCIService\Librerias\Librerias\obj\Debug\Librerias.dll
+C:\WcfRCIService\Librerias\Librerias\obj\Debug\Librerias.pdb
+Y:\Librerias\Librerias\bin\Debug\Librerias.dll
+Y:\Librerias\Librerias\bin\Debug\Librerias.pdb
+Y:\Librerias\Librerias\obj\Debug\Librerias.csprojResolveAssemblyReference.cache
+Y:\Librerias\Librerias\obj\Debug\Librerias.dll
+Y:\Librerias\Librerias\obj\Debug\Librerias.pdb
+\\sunsolcarapp08\Desarrollo\Librerias\Librerias\bin\Debug\Librerias.dll
+\\sunsolcarapp08\Desarrollo\Librerias\Librerias\bin\Debug\Librerias.pdb
+\\sunsolcarapp08\Desarrollo\Librerias\Librerias\obj\Debug\Librerias.dll
+\\sunsolcarapp08\Desarrollo\Librerias\Librerias\obj\Debug\Librerias.pdb
+Z:\Librerias\Librerias\bin\Debug\Librerias.dll
+Z:\Librerias\Librerias\bin\Debug\Librerias.pdb
+Z:\Librerias\Librerias\obj\Debug\Librerias.csprojResolveAssemblyReference.cache
+Z:\Librerias\Librerias\obj\Debug\Librerias.dll
+Z:\Librerias\Librerias\obj\Debug\Librerias.pdb
+C:\Flyinn\Librerias\Librerias\bin\Debug\Librerias.dll
+C:\Flyinn\Librerias\Librerias\bin\Debug\Librerias.pdb
+C:\Flyinn\Librerias\Librerias\obj\Debug\Librerias.dll
+C:\Flyinn\Librerias\Librerias\obj\Debug\Librerias.pdb
+C:\Flyinn\Librerias\Librerias\obj\Debug\Librerias.csprojResolveAssemblyReference.cache
+C:\APP DESARROLLLO\Flyinn\Librerias\Librerias\bin\Debug\Librerias.dll
+C:\APP DESARROLLLO\Flyinn\Librerias\Librerias\bin\Debug\Librerias.pdb
+C:\APP DESARROLLLO\Flyinn\Librerias\Librerias\obj\Debug\Librerias.csprojResolveAssemblyReference.cache
+C:\APP DESARROLLLO\Flyinn\Librerias\Librerias\obj\Debug\Librerias.dll
+C:\APP DESARROLLLO\Flyinn\Librerias\Librerias\obj\Debug\Librerias.pdb
+\\Wsiscsis005\c$\APP DESARROLLLO\Flyinn\Librerias\Librerias\bin\Debug\Librerias.dll
+\\Wsiscsis005\c$\APP DESARROLLLO\Flyinn\Librerias\Librerias\bin\Debug\Librerias.pdb
+\\Wsiscsis005\c$\APP DESARROLLLO\Flyinn\Librerias\Librerias\obj\Debug\Librerias.csprojResolveAssemblyReference.cache
+\\Wsiscsis005\c$\APP DESARROLLLO\Flyinn\Librerias\Librerias\obj\Debug\Librerias.dll
+\\Wsiscsis005\c$\APP DESARROLLLO\Flyinn\Librerias\Librerias\obj\Debug\Librerias.pdb
+\\sunsolcarapp08\Desarrollo\Flyinn\Librerias\Librerias\bin\Debug\Librerias.dll
+\\sunsolcarapp08\Desarrollo\Flyinn\Librerias\Librerias\bin\Debug\Librerias.pdb
+\\sunsolcarapp08\Desarrollo\Flyinn\Librerias\Librerias\obj\Debug\Librerias.csprojResolveAssemblyReference.cache
+\\sunsolcarapp08\Desarrollo\Flyinn\Librerias\Librerias\obj\Debug\Librerias.dll
+\\sunsolcarapp08\Desarrollo\Flyinn\Librerias\Librerias\obj\Debug\Librerias.pdb
+C:\Users\consultoria\Desktop\Flyinn\Librerias\Librerias\bin\Debug\Librerias.dll
+C:\Users\consultoria\Desktop\Flyinn\Librerias\Librerias\bin\Debug\Librerias.pdb
+C:\Users\consultoria\Desktop\Flyinn\Librerias\Librerias\obj\Debug\Librerias.dll
+C:\Users\consultoria\Desktop\Flyinn\Librerias\Librerias\obj\Debug\Librerias.pdb
+C:\Users\juan.salazar\Documents\Flyinn_TEST\Librerias\Librerias\bin\Debug\Librerias.dll
+C:\Users\juan.salazar\Documents\Flyinn_TEST\Librerias\Librerias\bin\Debug\Librerias.pdb
+C:\Users\juan.salazar\Documents\Flyinn_TEST\Librerias\Librerias\obj\Debug\Librerias.dll
+C:\Users\juan.salazar\Documents\Flyinn_TEST\Librerias\Librerias\obj\Debug\Librerias.pdb
+C:\Users\juan.salazar\Documents\Flyinn_PROD\Librerias\Librerias\bin\Debug\Librerias.dll
+C:\Users\juan.salazar\Documents\Flyinn_PROD\Librerias\Librerias\bin\Debug\Librerias.pdb
+C:\Users\juan.salazar\Documents\Flyinn_PROD\Librerias\Librerias\obj\Debug\Librerias.dll
+C:\Users\juan.salazar\Documents\Flyinn_PROD\Librerias\Librerias\obj\Debug\Librerias.pdb
+C:\Users\consultoria.SUNSOLHOTELES\Desktop\Flyinn_PROD\Librerias\Librerias\bin\Debug\Librerias.dll
+C:\Users\consultoria.SUNSOLHOTELES\Desktop\Flyinn_PROD\Librerias\Librerias\bin\Debug\Librerias.pdb
+C:\Users\consultoria.SUNSOLHOTELES\Desktop\Flyinn_PROD\Librerias\Librerias\obj\Debug\Librerias.csprojResolveAssemblyReference.cache
+C:\Users\consultoria.SUNSOLHOTELES\Desktop\Flyinn_PROD\Librerias\Librerias\obj\Debug\Librerias.dll
+C:\Users\consultoria.SUNSOLHOTELES\Desktop\Flyinn_PROD\Librerias\Librerias\obj\Debug\Librerias.pdb
+C:\Users\juan.salazar\Documents\Flyinn_PROD\Librerias\Librerias\obj\Debug\Librerias.csprojResolveAssemblyReference.cache
+C:\Users\juan.salazar\Documents\Flyinn\Librerias\Librerias\bin\Debug\Librerias.dll
+C:\Users\juan.salazar\Documents\Flyinn\Librerias\Librerias\bin\Debug\Librerias.pdb
+C:\Users\juan.salazar\Documents\Flyinn\Librerias\Librerias\obj\Debug\Librerias.dll
+C:\Users\juan.salazar\Documents\Flyinn\Librerias\Librerias\obj\Debug\Librerias.pdb

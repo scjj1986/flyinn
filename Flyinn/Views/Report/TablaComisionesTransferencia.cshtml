@@ -1,0 +1,74 @@
+﻿@model List<Flyinn.Models.ComisionesTrans>
+
+@{
+    //var style = "";
+    //double totalP = 0.00, totalG = 0.00, totalS = 0.00, totalC = 0.00, Total = 0.00;
+}
+
+<table class="table table-striped table-bordered table-hover" id="example">
+    <thead>
+        <tr>
+            <th class="center">Nombre</th>
+            <th class="center col-xs-1">Monto</th>
+            <th class="center col-xs-1">Tipo</th>
+        </tr>
+    </thead>
+    <tbody id="last">
+        @if (@Model != null)
+        {
+            for (int i = 0; i < @Model.Count; i++)
+            {
+                
+                    <tr class="odd gradeX">
+                        
+                        <td>@Model[i].nombre_completo</td>
+                        <td>@Model[i].monto</td>
+                        <td>@Model[i].tipo</td>
+                        
+                        
+                    </tr>
+
+            }
+        }
+        else
+        {
+            <tr class="odd gradeX"><td colspan="3" align="center">NO HUBO COINCIDENCIAS</td></tr>
+
+        }
+    </tbody>
+</table>
+
+<input hidden id="nregtrans" value="@Model.Count">
+
+@if (Model.Count > 0) { 
+
+<div class="col-sm-12">
+    <div class="panel-heading">
+
+        <div id="divtrans" class="text-center vd_info-parent">
+
+            <button id="btnTrans" type="button" onclick="TransferirComisiones()" class="btn btn-success"><i class="glyphicon glyphicon-search"></i>Transferir</button>
+
+        </div>
+    </div>
+</div>
+
+
+}
+
+
+
+
+<script type="text/javascript">
+
+        $('#example').dataTable({
+            "bPaginate": true,
+            "bLengthChange": true,
+            "bFilter": true,
+            "pageLength": 50,
+            "bSort": true,
+            "bInfo": true,
+            "bAutoWidth": true,
+            "asStripClasses": null
+        });
+    </script>

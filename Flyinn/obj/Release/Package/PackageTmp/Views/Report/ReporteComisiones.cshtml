@@ -1,0 +1,60 @@
+﻿@model List<Flyinn.Models.Empleado>
+@{ double TotalCertificados = 0.00; double TotalContratos = 0.00; int CantidadCertificados =0; int CantidadContratos =0; }
+<div align="center">
+    
+    <img style="height:90px; height:70px" src="~/Content/EstiloLogin/images/LOGOSUNSOLHOTELES.png" />
+    
+</div>
+<table class="table table-bordered"  id="example2">    
+        @if (@Model != null)
+        {
+            foreach (var item in @Model)
+            {
+                if (@item.Nombres != "SIN SUPERVISOR" && @item.Nombres != "SIN GERENTE" && @item.Nombres != "SIN COORDINADOR" && @item.Nombres != "SIN PROMOTOR")
+                { 
+                <tr>
+                    <th>Empleado</th>
+                    <th>Cargo</th>
+                </tr>
+                <tr>
+                    <td>@item.Nombres</td>
+                    <td>@item.Cargo.Descripcion</td>
+                </tr>
+                <tr ><th style="font-weight:bolder"><div align="center">Cantidad de Certificados</div></th><th style="font-weight:bolder"><div align="center">Monto Total Certificados</div></th></tr>
+                <tr><td style="font-weight:bolder"><div align="center">@item.CantidadCertificados</div></td><td style="font-weight:bolder"><div align="center">@String.Format("{0:N}", decimal.Parse(Convert.ToString(@item.TotalCertificados)))</div></td></tr>
+                           
+                <tr><th style="font-weight:bolder"><div align="center">Cantidad de Contratos</div></th><th style="font-weight:bolder"><div align="center">Monto Total Contratos</div></th></tr>
+                <tr><td style="font-weight:bolder"><div align="center">@item.CantidadContratos</div></td><td style="font-weight:bolder"><div align="center">@String.Format("{0:N}", decimal.Parse(Convert.ToString(@item.TotalContratos)))</div></td></tr>
+            
+                @*<tr style="background-color: #01A9DB;"><th style="font-weight:bolder" colspan="2"><div align="right">Monto Total</div></th></tr>
+                <tr><td style="font-weight:bolder" colspan="2"><div align="right">@String.Format("{0:0.00}", (@item.TotalContratos + @item.TotalCertificados))</div></td></tr>*@
+                <tr><th style="font-weight: bolder"><div align="center"></div></th><th style="font-weight: bolder; background-color: #BDBDBD; "><div align="center">Monto Total</div></th></tr>
+                <tr><td style="font-weight: bolder"><div align="center"></div></td><td style="font-weight:bolder"><div align="center">@String.Format("{0:N}", decimal.Parse(Convert.ToString(@item.TotalContratos + @item.TotalCertificados)))</div></td></tr>
+                
+            <tr style="background-color: #01A9DB; height:20px"><th colspan="2"></th></tr>   
+                { TotalCertificados += item.TotalCertificados;
+                   TotalContratos += item.TotalContratos;
+                   CantidadCertificados += item.CantidadCertificados;
+                   CantidadContratos += CantidadContratos;} 
+              }
+           
+            }
+             @*<tr style="background-color: #088A85;"><th style="font-weight:bolder"><div align="center">Cantidad de Certificados</div></th><th style="font-weight:bolder"><div align="center">Monto Total Certificados</div></th></tr>
+             <tr style="background-color: #088A85;"><td style=" font-weight:bolder"><div align="center">@CantidadCertificados</div></td><td style="font-weight:bolder"><div align="center">@String.Format("{0:0.00}", @TotalCertificados)</div></td></tr>
+
+             <tr style="background-color: #088A85;"><th style="font-weight:bolder"><div align="center">Cantidad de Contratos</div></th><th style="font-weight:bolder"><div align="center">Monto Total Contratos</div></th></tr>
+             <tr style="background-color: #088A85;"><td style=" font-weight:bolder"><div align="center">@CantidadContratos</div></td><td style="font-weight:bolder"><div align="center">@String.Format("{0:0.00}", @TotalContratos)</div></td></tr>*@
+                <tr style="background-color: #BDBDBD;"><th style="font-weight:bolder"><div align="center"></div></th><th style="font-weight:bolder"><div align="center">Monto General Certificados</div></th></tr>
+                <tr><td style="font-weight:bolder"><div align="center"></div></td><td style="font-weight:bolder"><div align="center">@String.Format("{0:N}", decimal.Parse(Convert.ToString(TotalCertificados)))</div></td></tr>
+                <tr style="background-color: #BDBDBD;"><th style="font-weight:bolder"><div align="center"></div></th><th style="font-weight:bolder"><div align="center">Monto General Contratos</div></th></tr>
+                <tr><td style="font-weight:bolder"><div align="center"></div></td><td style="font-weight:bolder"><div align="center">@String.Format("{0:N}", decimal.Parse(Convert.ToString(TotalContratos)))</div></td></tr>
+                <tr style="background-color: #BDBDBD;"><th style="font-weight:bolder"><div align="center"></div></th><th style="font-weight:bolder"><div align="center">Monto Total General</div></th></tr>
+                <tr><td style="font-weight:bolder"><div align="center"></div></td><td style="font-weight:bolder"><div align="center">@String.Format("{0:N}", decimal.Parse(Convert.ToString(TotalContratos + TotalCertificados)))</div></td></tr>
+           
+             @*<tr style="background-color: #088A85;"><td style="font-weight:bolder" colspan="2"><div align="right">@String.Format("{0:0.00}", (TotalCertificados + TotalContratos))</div></td></tr>*@
+
+
+
+        }   
+</table>
+

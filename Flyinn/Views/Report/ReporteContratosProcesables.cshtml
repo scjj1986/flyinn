@@ -1,0 +1,97 @@
+﻿@model List<Flyinn.Models.Programas>
+
+@{
+    var style = "";
+    double totalComisionP = 0.00; double totalComisionL = 0.00; double totalComisionC = 0.00;
+}
+
+<table class="table table-bordered table-hover" id="example">
+    @*<thead>
+        <tr>
+            <th class="center ">Fecha Venta</th>           
+            <th class="center ">Nro. Contrato</th>
+            <th class="center ">Precio Contrato</th>
+            <th class="center">Fecha Procesable</th>
+            <th class="center ">Programa</th>
+            <th class="center ">Promotor</th>
+            <th class="center">Comisión</th>
+            <th class="center">Liner</th>
+            <th class="center">Comisión</th>
+            <th class="center">Closer</th>
+            <th class="center">Comisión</th>           
+            <th hidden></th>
+           
+        </tr>
+    </thead>*@
+    <tbody id="last">
+        @if (@Model != null)
+        {
+           foreach(var contratos in @Model)
+            {
+                
+                    <tr>
+                        <th colspan="10" class="center ">CLOSING COST @contratos.Descripcion DEL @ViewData["fechaInicio"] AL @ViewData["fechaFin"]  </th><td></td>
+                    </tr>
+                     <tr>
+                        <th class="center ">Fecha Venta</th>
+                        <th class="center ">Nro. Contrato</th>
+                        <th class="center ">Precio Contrato</th>
+                        <th class="center">Fecha Procesable</th>
+                        <th class="center ">Programa</th>
+                        <th class="center ">Promotor</th>
+                        <th class="center">Comisión</th>
+                        <th class="center">Liner</th>
+                        <th class="center">Comisión</th>
+                        <th class="center">Closer</th>
+                        <th class="center">Comisión</th>
+                       
+                    </tr>
+                    foreach (var listado in contratos.listContratos )
+	                {
+		                <tr style="@style" class="odd gradeX" id="@listado.NroContrato" ondblclick="UploadContratos(@listado.NroContrato)">                        
+                      
+                        <td>@listado.FechaCreacion.ToShortDateString()</td>                        
+                        <td>@listado.NroContrato</td>
+                        
+                            <td>@String.Format("{0:N}", decimal.Parse(String.Format("{0:0.00}", @listado.MontoContrato)))</td>
+                        <td>@listado.FechaProcesable.ToShortDateString()</td>
+                        <td>@listado.Programa.Descripcion</td>
+                        <td>@listado.Promotor.Nombres</td>                    
+                        <td id="@String.Format("-CP{0}", @listado.NroContrato)">@String.Format("{0:N}", decimal.Parse(Convert.ToString(@listado.Comisiones.ComisionPromotor)))</td>
+                        <td>@listado.Liner.Nombres</td>                       
+                        <td id="@String.Format("-CL{0}", @listado.NroContrato)" >@String.Format("{0:N}", decimal.Parse(Convert.ToString(@listado.Comisiones.ComisionLiner)))</td>
+                        <td>@listado.Closer.Nombres</td>               
+                        <td id="@String.Format("-CC{0}", @listado.NroContrato)">@String.Format("{0:N}", decimal.Parse(Convert.ToString(@listado.Comisiones.ComisionCloser)))</td>                       
+                        <td hidden>@String.Format("{0:0.00}", @totalComisionP = contratos.listContratos.Sum(x=>x.Comisiones.TotalComisionP))</td> 
+                        <td hidden>@String.Format("{0:0.00}", @totalComisionL = contratos.listContratos.Sum(y=>y.Comisiones.TotalComisionL))</td>
+                        <td hidden>@String.Format("{0:0.00}", @totalComisionC = contratos.listContratos.Sum(z=>z.Comisiones.TotalComisionC))</td>
+                        <td hidden>
+                            <input id="@String.Format("idPromotor{0}", @listado.NroContrato)" value="@listado.CodPromotor.CodigoEmpleado" />
+                            <input id="@String.Format("Promotor{0}", @listado.NroContrato)" value="@listado.Promotor.Nombres" /> 
+                            <input id="@String.Format("CP{0}", @listado.NroContrato)" value="@listado.Comisiones.ComisionPromotor" />   
+                            <input id="@String.Format("idLiner{0}", @listado.NroContrato)" value="@listado.CodLiner.CodigoEmpleado" />                     
+                            <input id="@String.Format("Liner{0}", @listado.NroContrato)" value="@listado.Liner.Nombres" /> 
+                            <input id="@String.Format("CL{0}", @listado.NroContrato)" value="@listado.Comisiones.ComisionLiner" /> 
+                            <input id="@String.Format("idCloser{0}", @listado.NroContrato)" value="@listado.CodCloser.CodigoEmpleado" />                                   
+                            <input id="@String.Format("Closer{0}", @listado.NroContrato)" value="@listado.Closer.Nombres" />
+                            <input id="@String.Format("CC{0}", @listado.NroContrato)" value="@listado.Comisiones.ComisionCloser" />          
+                            <input id="@String.Format("NC{0}", @listado.NroContrato)" value="@listado.NroContrato" />       
+                            <input id="@String.Format("FV{0}", @listado.NroContrato)" value="@listado.FechaCreacion.ToShortDateString()" />
+                            <input id="@String.Format("FP{0}", @listado.NroContrato)" value="@listado.FechaProcesable.ToShortDateString()" />
+                            <input id="@String.Format("MC{0}", @listado.NroContrato)" value="@String.Format("{0:0.00}", (Math.Truncate(@listado.MontoContrato * 100) / 100))" />
+                            <input hidden/>
+                        </td>
+                    </tr>
+               
+	                }
+                    
+                <tr style="background-color: #01A9DB; height:8px"><th colspan="5"></th><th>TOTAL</th><th style="" colspan="1">@String.Format("{0:N}", decimal.Parse(Convert.ToString(@totalComisionP)))</th><th colspan="1">TOTAL</th><th>@String.Format("{0:N}", decimal.Parse(Convert.ToString(@totalComisionL)))</th><th colspan="1">TOTAL</th><th>@String.Format("{0:N}", decimal.Parse(Convert.ToString(@totalComisionC)))</th></tr>    
+                <tr style="background-color: #01A9DB; height:10px"><th colspan="9"></th><th>TOTAL CLOSING @contratos.Descripcion </th><th>@String.Format("{0:N}", decimal.Parse(Convert.ToString(totalComisionP + totalComisionL + totalComisionC)))</th></tr>   
+                totalComisionP = 0.00;
+                totalComisionL = 0.00;
+                totalComisionC = 0.00;
+            }
+        }
+    </tbody>
+</table>
+

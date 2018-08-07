@@ -1,0 +1,171 @@
+﻿@model List<Flyinn.Models.Usuarios>
+
+<form id="users" method="post" action="#" enctype="multipart/form-data">
+    <div class="col-sm-12" style="margin-left: 18%">
+        <div class="col-lg-12">
+            <div class="panel-heading">
+                <div class="text-muted bootstrap-admin-box-title" style="font-weight:bold; float:left;">Nuevo Usuario</div>
+            </div>
+        </div>
+        <div style="margin-left:15%">
+            <div class="alert alert-danger vd_hidden" style="display:none; width:80%" id="oculto">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="glyphicon glyphicon-remove"></i></button>
+                <span class="vd_alert-icon"><i class="glyphicon glyphicon-exclamation-sign vd_red"></i></span><strong>Importante!</strong> Estos Campos se encuentran Vacios o estan Incorrectos: <label style="color:red" id="error"></label>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="col-sm-2" style:"margin-top:20px">
+                <div class="row mgbt-xs-0">
+                    <!--Nombre Usuario-->
+                    <label class="col-xs-7 control-label" style="margin-top:10px">Nombre Usuario</label>
+                    <div class="col-xs-8 controls">
+                        <input id="nbUsuario" type="text" name="nbUsuario" onkeyup="this.value = this.value.toUpperCase();" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2" style:"margin-top:20px">
+                <div class="row mgbt-xs-0">
+                    <!--Contraseña-->
+                    <label class="col-xs-7 control-label" style="margin-top:10px">Contraseña</label>
+                    <div class="col-xs-8 controls">
+                        <input id="contraseña" type="password" name="contraseña" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2" style:"margin-top:20px">
+                <div class="row mgbt-xs-0">
+                    <!--Repetir Contraseña-->
+                    <label class="col-xs-9 control-label" style="margin-top:10px">Repetir Contraseña</label>
+                    <div class="col-xs-8 controls">
+                        <input id="repContraseña" type="password" name="repContraseña" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2" style:"margin-top:20px">
+                <div class="row mgbt-xs-0">
+                    <!--CEDULA-->
+                    <label class="col-xs-7 control-label" style="margin-top:10px">Cédula</label>
+                    <div class="col-xs-8 controls">
+                        <input id="Cedula" type="text" name="Cedula" maxlength="8" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="col-sm-2" style:"margin-top:20px">
+                <div class="row mgbt-xs-0">
+                    <!--nombre del usuario-->
+                    <label class="col-xs-7 control-label" style="margin-top:10px">Nombre</label>
+                    <div class="col-xs-8 controls">
+                        <input id="nombreUser" type="text" name="nombreUser" onkeyup="this.value = this.value.toUpperCase();" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2" style:"margin-top:20px">
+                <div class="row mgbt-xs-0">
+                    <!--apellido del usuario-->
+                    <label class="col-xs-7 control-label" style="margin-top:10px">Apellido</label>
+                    <div class="col-xs-8 controls">
+                        <input id="apeUser" type="text" name="apeUser" onkeyup="this.value = this.value.toUpperCase();" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2" style:"margin-top:20px">
+                <div class="row mgbt-xs-0">
+                    <!--Correo-->
+                    <label class="col-xs-7 control-label" style="margin-top:10px">Correo</label>
+                    <div class="col-xs-12 controls">
+                        <input id="correo" type="text" name="correo" onkeyup="this.value = this.value.toUpperCase();" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2" style:"margin-top:20px">
+                <div class="row mgbt-xs-0">
+                    <!--Perfil-->
+                    <label class="col-xs-7 control-label" style="margin-top:10px">Perfil</label>
+                    <div class="col-xs-11 controls">
+                        @Html.DropDownList("Perfil", (SelectList)ViewData["Perfil"], new { @style = "width:110%" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2" style:"margin-top:20px">
+                <div class="row mgbt-xs-0">
+                    <!--Activo-->
+                    <label class="col-xs-7 control-label" style="margin-top:10px">Activo</label>
+                    <div class="col-xs-8 controls">
+                        <input type="checkbox" name="activo" id="activo" onclick="checkbox(this)" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="tablaUser" style="margin-top: 1%; overflow: scroll; width: 100%; height: 400px" class="col-lg-12">
+        <table id="tabla_user" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="center">Usuario</th>
+                    <th class="center">Nombre</th>
+                    <th class="center">Apellido</th>
+                    <th class="center">Cedula</th>
+                    <th class="center">Correo</th>
+                    <th class="center">Perfil</th>
+                    <th class="center">Activo</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (@Model != null)
+                {
+                    for (int i = 0; i <= @Model.Count - 1; i++)
+                    {
+
+                        <tr class="odd gradeX" id="@Model[i]" ondblclick="UploadUsuarios(@i)">
+                            <td class="center col-sm-1">@Model[i].nbUsuario</td>
+                            <td class="center">@Model[i].nombreUser</td>
+                            <td class="center">@Model[i].apeUser</td>
+                            <td class="center">@Model[i].Cedula</td>
+                            <td class="center">@Model[i].correo</td>
+                            <td class="center">@Model[i].nbPerfil</td>
+                            <td class="center">@Model[i].Estado</td>
+
+                            <td hidden>
+                                <input id="@String.Format("usuario{0}",@i)" value="@Model[i].nbUsuario" />
+                                <input id="@String.Format("nombre{0}", @i)" value="@Model[i].nombreUser" />
+                                <input id="@String.Format("apellido{0}", @i)" value="@Model[i].apeUser" />
+                                <input id="@String.Format("cedula{0}", @i)" value="@Model[i].Cedula" />
+                                <input id="@String.Format("correo{0}", @i)" value="@Model[i].correo" />
+                                <input id="@String.Format("perfil{0}", @i)" value="@Model[i].Perfil" />
+                                <input id="@String.Format("act{0}", @i)" value="@Model[i].activo" />
+                                <input id="@String.Format("contraseña{0}", @i)" value="@Model[i].contraseña" />
+                                <input id="@String.Format("Cod{0}", @i)" value="@Model[i].Codigo" />
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <input hidden id="Codigo" name="Codigo" type="text" />
+
+    </div>
+    <div id="botonModificar" class="col-sm-9" style="margin-left:10%; margin-top:1%; display:none;">
+        <div class="row mgbt-xs-0">
+            <div class="text-center vd_info-parent">
+                <button type="button" class="btn btn-info" style="width:10%; height:5%" id="btnuevo" onclick="limpiar(),ShowControlesUsuarios()"><i class="glyphicon glyphicon-floppy-disk"></i> Nuevo</button>
+                <button type="button" class="btn btn-info" style="width:10%; height:5%" id="modificar_usuarios" onclick="InsertarUsuarios('modificar_usuarios')"><i class="glyphicon glyphicon-floppy-disk"></i> Modificar </button>
+                <button type="button" class="btn btn-info" style="width:10%; height:5%" id="popup_cancel1" onclick="popup('popUpDiv1')"><i class="glyphicon glyphicon-remove-sign"></i> Cancelar </button>
+            </div>
+        </div>
+    </div>
+    <div id="botonGuardar" class="col-sm-9" style="margin-left:10%; margin-top:1%;">
+        <div class="row mgbt-xs-0">
+            <div class="text-center vd_info-parent">
+                <button type="button" class="btn btn-info" style="width:10%; height:5%" id="btnuevo" onclick="limpiar(),ShowControlesUsuarios()"><i class="glyphicon glyphicon-floppy-disk"></i> Nuevo</button>
+                @* @Ajax.ActionLink("Guardar Usuario ", "RefrescarCrearUsuarios", new { }, new AjaxOptions { UpdateTargetId = "tabla_user" }, new { @onclick = ("InsertarUsuarios('insertar_usuarios')"), @title = "Guardar Usuario", @class = "btn btn-success glyphicon glyphicon-disk" })*@
+                <button type="button" class="btn btn-info" style="width:10%; height:5%" id="insertar_usuarios" onclick="InsertarUsuarios('insertar_usuarios')"><i class="glyphicon glyphicon-floppy-disk"></i> Guardar </button>
+                <button type="button" class="btn btn-info" style="width:10%; height:5%" id="popup_cancel" onclick="popup('popUpDiv1')"><i class="glyphicon glyphicon-remove-sign"></i> Cancelar </button>
+            </div>
+        </div>
+    </div>
+
+</form>

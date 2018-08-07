@@ -1,0 +1,545 @@
+﻿@model List<Flyinn.Models.Certificados>
+@{
+    double Total = 0.00;
+}
+<html lang="es">
+<head>
+
+    <title>Hola - Bootstrap Admin Theme</title>
+
+    <link href="~/Content/EstiloLogin/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/EstiloLogin/css/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/EstiloLogin/css/dataTables.responsive.css" rel="stylesheet" />
+    <link href="~/Content/EstiloLogin/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/EstiloLogin/css/DatatableMin2.css" rel="stylesheet" />
+    <link href="~/Content/dist/sweetalert.css" rel="stylesheet" />  
+   
+    <link href="~/Content/EstiloCV/css/theme.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/EstiloCV/css/chrome.css" rel="stylesheet" type="text/chrome">
+    <link href="~/Content/EstiloCV/css/theme-responsive.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/EstiloCV/custom/custom.css" rel="stylesheet" type="text/css">
+  
+</head>
+<body>
+    @if (Request.IsAuthenticated)
+    {
+        <text>
+            @using (Html.BeginForm("LogOff", "Certificados", FormMethod.Post, new { id = "logoutForm" }))
+            {
+                @Html.AntiForgeryToken()
+            }
+        </text>
+    }
+    <div id="page-wrapper">
+        <div id="blanket" style=" display: none; background-color: #111; opacity: 0.65; *background: none; position: absolute; top: 0px; left: 0px; width: 100%; height:100%; z-index: 100;"></div>
+        <div class="row" id="popUpDiv" style="display: none; margin-top: 2.5%; margin-left: 5%; position: absolute; background: white; width: 90%; height:90%; border: 3px solid #0d7183; z-index: 100;">
+            <form method="post" action="#" enctype="multipart/form-data">
+                <div class="col-sm-12" style="margin-left: 18%">
+                    <div class="col-lg-12">
+                        <div class="panel-heading">
+                            <div class="text-muted bootstrap-admin-box-title" style="font-weight:bold; float:left;">Nuevos Certificados</div>
+                        </div>
+                    </div>
+                    <div style="margin-left:15%">
+                        <div class="alert alert-danger vd_hidden" style="display:none; width:80%" id="oculto">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="glyphicon glyphicon-remove"></i></button>
+                            <span class="vd_alert-icon"><i class="glyphicon glyphicon-exclamation-sign vd_red"></i></span><strong>Importante!</strong> Estos Campos se encuentran Vacios o estan Incorrectos: <label style="color:red" id="error"></label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="col-sm-2" style:"margin-top:20px">
+                            <div class="row mgbt-xs-0">
+                                <!--Codigo Certificado-->
+                                <label class="col-x-9 control-label" style="margin-top:10px">Codigo Certificado</label>
+                                <div class="col-xs-8 controls">
+                                    <input id="codCertificado" type="text" name="codCertificado" onkeyup="this.value = this.value.toUpperCase();" />
+                                    <input hidden id="codCertificado2" type="text" name="codCertificado2" onkeyup="this.value = this.value.toUpperCase();" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2" style:"margin-top:20px">
+                            <div class="row mgbt-xs-0">
+                                <!--Fecha Certificado-->
+                                <label class="col-xs-7 control-label" style="margin-top:10px">Fecha</label>
+                                <div class="col-xs-8 controls">
+                                    <input id="fechaCertificado" type="date" name="fechaCertificado" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2" style:"margin-top:20px">
+                            <div class="row mgbt-xs-0">
+                                <!--Cliente Certificado-->
+                                <label class="col-xs-7 control-label" style="margin-top:10px">Cliente</label>
+                                <div class="col-xs-8 controls">
+                                    <input id="nbCliente" type="text" name="nbCliente" onkeyup="this.value = this.value.toUpperCase();" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2" style:"margin-top:20px">
+                            <div class="row mgbt-xs-0">
+                                <!--Cliente Cedula-->
+                                <label class="col-xs-7 control-label" style="margin-top:10px">Cedula Cliente</label>
+                                <div class="col-xs-8 controls">
+                                    <input id="cedulaCliente" type="text" name="cedulaCliente" onkeyup="this.value = this.value.toUpperCase();" maxlength="12" />
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+<!---------------------------------------------------segunda parte de los controles --------------------------------------------------------------------------------------------------------------------------------->
+                    <div class="col-sm-12" style="margin-right:50%;">
+                        <div class="col-sm-2" style:"margin-top:20px">
+                            <div class="row mgbt-xs-0">
+                                <!--nombre acompañante.-->
+                                <label class="col-x-9 control-label" style="margin-top:10px">Nombre Acompañante</label>
+                                <div class="col-xs-8 controls">
+                                    <input id="nbAcompañante" type="text" name="nbAcompañante" onkeyup="this.value = this.value.toUpperCase();" onkeypress="return AcceptLetters(event)" />
+                                </div>
+                            </div>
+                        </div>                        
+                        <div class="col-sm-2" style:"margin-top:20px">
+                            <div class="row mgbt-xs-0">
+                                <!--cedula acompañante-->
+                                <label class="col-xs-9 control-label" style="margin-top:10px">Cedula Acompañante</label>
+                                <div class="col-xs-8 controls">
+                                    <input id="cedulaAc" type="text" name="cedulaAc" onkeyup="this.value = this.value.toUpperCase();" maxlength="12" />
+                                </div>
+                            </div>
+                        </div>                       
+
+                        <div class="col-sm-2" style:"margin-top:20px">
+                            <div class="row mgbt-xs-0">
+                                <!--Hotel Certificado-->
+                                <label class="col-xs-7 control-label" style="margin-top:10px">Hotel</label>
+                                <div class="col-xs-8 controls">
+                                    @Html.DropDownList("Sucursal", (SelectList)ViewData["Sucursal"], new { @style = "width:100%" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2" style:"margin-top:20px">
+                            <div class="row mgbt-xs-0">
+                                <!--Promotor Certificado-->
+                                <label class="col-xs-7 control-label" style="margin-top:10px">Promotor</label>
+                                <div class="col-xs-8 controls">
+                                    @Html.DropDownList("Promotores", (SelectList)ViewData["Promotores"], new { @style = "width:100%" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                                               
+                        <div class="col-sm-2" style:"margin-top:20px">
+                            <div class="row mgbt-xs-0">
+                                <!--Supervisor Certificado-->
+                                <label class="col-xs-7 control-label" style="margin-top:10px">Supervisor</label>
+                                <div class="col-xs-8 controls">
+                                    @Html.DropDownList("Supervisores", (SelectList)ViewData["Supervisores"], new { @style = "width:100%" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2" style:"margin-top:20px">
+                            <div class="row mgbt-xs-0">
+                                <!--Gerente Certificado-->
+                                <label class="col-xs-7 control-label" style="margin-top:10px">Gerente</label>
+                                <div class="col-xs-8 controls">
+                                    @Html.DropDownList("Gerentes", (SelectList)ViewData["Gerentes"], new { @style = "width:100%" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2" style:"margin-top:20px">
+                            <div class="row mgbt-xs-0">
+                                <!--LINER-->
+                                <label class="col-xs-7 control-label" style="margin-top:10px">Liner</label>
+                                <div class="col-xs-8 controls">
+                                   @* @Html.DropDownList("Liner", (SelectList)ViewData["Liner"], new { @style = "width:100%" })*@
+                                    <input id="Liner" type="text" name="Liner" onkeyup="this.value = this.value.toUpperCase();" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2" style:"margin-top:20px">
+                            <div class="row mgbt-xs-0">
+                                <!--CLOSER-->
+                                <label class="col-xs-7 control-label" style="margin-top:10px">Closer</label>
+                                <div class="col-xs-8 controls">
+                                    @*@Html.DropDownList("Closer", (SelectList)ViewData["Closer"], new { @style = "width:100%" })*@
+                                    <input id="Closer" type="text" name="Closer" onkeyup="this.value = this.value.toUpperCase();" />
+                                </div>
+                            </div>
+                        </div>
+                     
+                    </div>
+<!---------------------------------------tercera parte------------------------------------------------------------------------------->
+                    <div class="col-sm-12">
+                        <!--Noches-->
+                        <div class="col-sm-2" style:"margin-top:20px">
+                            <div class="row mgbt-xs-0">
+                                <label class="col-xs-7 control-label" style="margin-top:10px">Noches</label>
+                                <div class="col-xs-8 controls">
+                                    <input id="Noches" type="number" name="Noches" value="3" maxlength="2" />
+                                </div>
+                            </div>
+                        </div>
+                        <!--ADULTOS-->
+                        <div class="col-sm-2" style:"margin-top:20px">
+                            <div class="row mgbt-xs-0">
+                                <label class="col-xs-7 control-label" style="margin-top:10px">Adultos</label>
+                                <div class="col-xs-8 controls">
+                                    <input id="Adultos" type="number" name="Adultos" onchange="calculoMontoPagar()" />
+                                </div>
+                            </div>
+                        </div>
+                        <!--NIÑOS-->
+                        <div class="col-sm-2" style:"margin-top:20px">
+                            <div class="row mgbt-xs-0">
+                                <label class="col-xs-7 control-label" style="margin-top:10px">Niños</label>
+                                <div class="col-xs-8 controls">
+                                    <input id="Niños" type="number" name="Niños" onchange="calculoMontoPagar()" />
+                                </div>
+                            </div>
+                        </div>
+                        <!--MONTO CERTIFICADO-->
+                        <div class="col-sm-2" style:"margin-top:20px">
+                            <div class="row mgbt-xs-0">
+                                <label class="col-xs-9 control-label" style="margin-top:10px">Monto del Certificado</label>
+                                <div class="col-xs-8 controls">
+                                    <input id="MontoCertificado" type="text" name="MontoCertificado" />
+                                </div>
+                            </div>
+                        </div>
+                       
+                        <!--OBSERVACIONES-->
+                        <div class="col-sm-2" style="margin-right:10%">
+                            <div class="row mgbt-xs-0">
+                                <label class="col-xs-7 control-label" style="margin-top:10px">Observaciones</label>
+                                <div class="col-xs-10 controls">
+                                    <input  id="Observaciones" type="text" name="Observaciones" onkeyup="this.value.toUpperCase()" value="comentario" />
+                                </div>
+                            </div>
+                        </div>
+                        <!--MONTO A PAGAR-->
+                        <div hidden class="col-sm-2" style:"margin-top:20px">
+                            <div class="row mgbt-xs-0">
+                                <label class="col-xs-7 control-label" style="margin-top:10px">Monto a Pagar</label>
+                                <div class="col-xs-8 controls">
+                                    <input id="MontoPagar" type="text" readonly name="MontoPagar" />
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+
+                    <div class="col-sm-12">
+                        
+                        <div class="col-sm-2" style:"margin-top:20px">
+                            <div class="row mgbt-xs-0">
+                                <!--Fecha Certificado-->
+                                <label class="col-xs-7 control-label" style="margin-top:10px">Fecha de Reserva</label>
+                                <div class="col-xs-8 controls">
+                                    <input id="fechaReserva" type="date" name="fechaReserva" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-2" style:"margin-top:20px">
+                            <div class="row mgbt-xs-0">
+                                <!--Fecha Certificado-->
+                                <label class="col-xs-7 control-label" style="margin-top:10px">Fecha Viaje Cliente</label>
+                                <div class="col-xs-8 controls">
+                                    <input id="fechaViajeCliente" type="date" name="fechaViajeCliente" />
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+
+                    </div>
+
+
+                </div>
+                <div id="boton1" class="col-sm-12" style="margin-top:15px">
+                    <div class="row mgbt-xs-0">
+                        <div class="text-center vd_info-parent">
+                            <button type="button" class=" btn btn-info" id="buttonmas" onclick="AddCertificado()"><i class="glyphicon glyphicon-plus-sign"></i> Agregar </button>
+                        </div>
+                    </div>
+                </div>
+                <div id="boton" class="col-sm-9" style="margin-left:10%; margin-top:1%; display:none;">
+                    <div class="row mgbt-xs-0">
+                        <div class="text-center vd_info-parent">
+                            <button type="button" class="btn btn-info" style="width:10%; height:5%" id="modificar_certificado" onclick="modificarCertificado()"><i class="glyphicon glyphicon-floppy-disk"></i> Modificar </button>
+                            <button type="button" class="btn btn-info" style="width:10%; height:5%" id="popup_cancel" onclick="popup('popUpDiv')"><i class="glyphicon glyphicon-remove-sign"></i> Cancelar </button>
+                        </div>
+                    </div>
+                </div>
+                <div id="tabla" style="margin-top:1%; overflow-y:scroll; width:100%; height:200px" class="col-lg-12">
+                    <table id="tabla_cetificado" class="table table-bordered table-condensed">
+                        <thead>
+                            <tr>
+                                <th class="center">Certificado</th>
+                                <th class="center">Fecha</th>
+                                <th class="center">Cliente</th>
+                                <th class="center">Cedula</th>
+                                <th class="center">Acompañante</th>
+                                <th class="center">Cedula</th>
+                                <th class="center">Hotel</th>
+                                <th class="center">Promotor</th>
+                                <th class="center">Supervisor</th>
+                                <th class="center">Gerente</th>
+                                <th class="center">Liner</th>
+                                <th class="center">Closer</th>
+                                <th class="center">Noches</th>
+                                <th class="center">Adultos</th>
+                                <th class="center">Niños</th>
+                                <th class="center">Monto Certificado</th>
+                                <th class="center">Monto a Pagar</th>
+                                <th class="center">Observaciones</th>
+                                <th class="center">Fecha Reserva</th>
+                                <th class="center">Fecha Viaje Cliente</th>
+                                <th class="center">-</th>
+                            </tr>
+                        </thead>
+                        <tbody id="last"></tbody>
+                    </table>
+                    <input hidden id="certificados" name="certificados" type="text" />
+                </div>
+                <div id="botones" class="col-sm-9" style="margin-left:10%; margin-top:1%;">
+                    <div class="row mgbt-xs-0">
+                        <div class="text-center vd_info-parent">
+                            <button type="button" class="btn btn-info" style="width:10%; height:5%" id="insertar_certificado" onclick="InsertarCertificado()"><i class="glyphicon glyphicon-floppy-disk"></i> Guardar </button>
+                            <button type="button" class="btn btn-info" style="width:10%; height:5%" id="popup_cancel" onclick="popup('popUpDiv')"><i class="glyphicon glyphicon-remove-sign"></i> Cancelar </button>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <div class="vd_body">
+            <div class="content">
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 style="margin-left:2%; margin-top:1%; float:left; font-size:25px;"><img style="margin-top: -2%; width:90px; height:60px;"  src="~/Content/EstiloLogin/images/LOGOSUNSOLHOTELES.png" />  Listado de Certificados</h1>
+                        <button type="button" class="btn btn-danger btn-xs" style="float:right; margin-top:1.5%; margin-right:2%" id="link" onclick="javascript: document.getElementById('logoutForm').submit()"><i class="glyphicon glyphicon-remove-sign"></i> Cerrar Sesion </button>
+                       @if (ViewBag.Users==false)
+                       {
+                            @Html.ActionLink(" Listado Contratos ", "Principal", "Contratos", null, new { @style = "float:right; margin-top:1.5%; margin-right:1%;", @id = "btnCertificados", @title = "Mostrar Certificados", @class = "btn btn-info btn-xs" })
+                        @Html.ActionLink("Reportes", "Report", "Report", null, new { @style = "float:right; margin-top:1.5%; margin-right:1%;", @id = "btnCertificados", @title = "Mostrar Certificados", @class = "btn btn-info btn-xs" })
+                       }
+                       
+                        <button title="Agregar un Certificado" type="button" class="btn btn-info btn-xs" style="float:right; margin-top:1.5%; margin-right:1%" id="link" onclick="popup('popUpDiv'), mostrarControles(),LimpiarCertificado()"><i class="glyphicon glyphicon-plus"></i> Agregar un Certificado </button>
+                    </div>
+                </div>
+                <form method="post" action="#" enctype="multipart/form-data">
+                    <div class="row">
+                        
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div class="table-responsive" id="example1" >
+                                        <div class="col-sm-2">
+                                            <div class="row mgbt-xs-0">
+                                                <div class="col-xs-8 controls" style=" margin-left:1px; margin-top:2px !Important">
+                                                    <label class="col-xs-12 control-label">Fecha Inicio</label>
+                                                    <div class="text-center vd_info-parent">
+                                                        <input type="date" name="fechaInicio" id="fechaInicio" onkeyup="if (event.keyCode == 13) Buscar()" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="row mgbt-xs-0">
+                                                <div class="col-xs-8 controls" style="margin-left:1px; margin-top:2px; margin-bottom:6% !Important">
+                                                    <label class="col-xs-12 control-label">Fecha Fin</label>
+                                                    <div class="text-center vd_info-parent ">
+                                                        <input type="date" name="fechaFin" id="fechaFin" onkeyup="if (event.keyCode == 13) Buscar()" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div style="margin-top:2%" class="col-sm-2">
+                                            <div class="panel-heading">
+                                                <div class="text-center vd_info-parent">
+                                                    <button type="button" onclick="Buscar()" class="btn btn-success"><i class="glyphicon glyphicon-search"></i>Buscar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                       
+                                            <table class="table table-bordered table-striped" id="example">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="center">Certificado</th>
+                                                        <th class="center">Fecha</th>
+                                                        <th class="center col-md-9">Cliente</th>
+                                                        <th class="center">Cedula</th>
+                                                        <th class="center">Acompañante</th>
+                                                        <th class="center">Cedula</th>
+                                                        <th class="center">Hotel</th>
+                                                        <th class="center">Promotor</th>
+                                                        <th class="center">Supervisor</th>
+                                                        <th class="center">Gerente</th>
+                                                        <th class="center">Liner</th>
+                                                        <th class="center">Closer</th>
+                                                        <th class="center">Noches</th>
+                                                        <th class="center">Adultos</th>
+                                                        <th class="center">Niños</th>
+                                                        <th class="center">Monto Certificado</th>
+                                                        <th class="col-md-10">Monto a Pagar</th>
+                                                        <th class="center">Observaciones</th>
+                                                        <th class="center">Fecha Reserva</th>
+                                                        <th class="center">Fecha Viaje Cliente</th>
+
+                                                        <th hidden></th>
+                                                        <th hidden></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @if (@Model != null)
+                                                    {
+                                                        for (int i = 0; i <= @Model.Count; i++)
+                                                        {
+                                                            if (i != @Model.Count)
+                                                            {
+                                                                <tr class="odd gradeX" id="@Model[i].CodigoCertificado" ondblclick="UploadCertificado(@i)">
+                                                                    <td class="center col-sm-1">@Model[i].CodigoCertificado</td>
+                                                                    <td class="center">@Model[i].Fecha.ToShortDateString()</td>
+                                                                    <td class="center col-x-9">@Model[i].nbCliente</td>
+                                                                    <td class="center">@Model[i].cedulaCliente</td>
+                                                                    <td class="center">@Model[i].nbAcompañante</td>
+                                                                    <td class="center">@Model[i].cedulaAc</td>
+                                                                    <td class="center">@Model[i].Sucursal.nbSucursal</td>
+                                                                    <td class="center">@Model[i].Promotor.Nombres</td>
+                                                                    <td class="center">@Model[i].Supervisor.Nombres</td>
+                                                                    <td class="center">@Model[i].Gerente.Nombres</td>
+                                                                    <td class="center">@Model[i].Liner.Nombres</td>
+                                                                    <td class="center">@Model[i].Closer.Nombres</td>
+                                                                    <td class="center">@Model[i].NroNoches</td>
+                                                                    <td class="center">@Model[i].NroAdultos</td>
+                                                                    <td class="center">@Model[i].NroNiños</td>
+                                                                    <td class="center">@String.Format("{0:N}", decimal.Parse(String.Format("{0:0.00}", @Model[i].montoCertificado)))</td>
+                                                                    <td class="center">@String.Format("{0:N}", decimal.Parse(String.Format("{0:0.00}", @Model[i].MontoPagar)))</td>
+                                                                    <td class="center">@Model[i].Observaciones</td>
+                                                                    <td class="center">@Model[i].fReserva</td>
+                                                                    <td class="center">@Model[i].fViajeCliente</td>
+                                                                    <td hidden>@{ Total += @Model[i].MontoPagar; }</td>
+
+
+                                                                    <td hidden>
+                                                                        <input id="@String.Format("cod{0}",@i)" value="@Model[i].CodigoCertificado" />
+                                                                        <input id="@String.Format("fecha{0}", @i)" value="@Model[i].Fecha" />
+                                                                        <input id="@String.Format("dia{0}", @i)" value="@Model[i].dia" />
+                                                                        <input id="@String.Format("mes{0}", @i)" value="@Model[i].mes" />
+                                                                        <input id="@String.Format("año{0}", @i)" value="@Model[i].ano" />
+                                                                        <input id="@String.Format("nbC{0}", @i)" value="@Model[i].nbCliente" />
+                                                                        <input id="@String.Format("suc{0}", @i)" value="@Model[i].Sucursal.idSucursal" />
+                                                                        <input id="@String.Format("sN{0}", @i)" value="@Model[i].Sucursal.nbSucursal" />
+                                                                        <input id="@String.Format("pN{0}", @i)" value="@Model[i].Promotor.idEmpleado" />
+                                                                        <input id="@String.Format("sup{0}", @i)" value="@Model[i].Supervisor.idEmpleado" />
+                                                                        <input id="@String.Format("gN{0}", @i)" value="@Model[i].Gerente.idEmpleado" />
+                                                                        <input id="@String.Format("Liner{0}", @i)" value="@Model[i].Liner.Nombres" />
+                                                                        <input id="@String.Format("Closer{0}", @i)" value="@Model[i].Closer.Nombres" />
+                                                                        <input id="@String.Format("noches{0}", @i)" value="@Model[i].NroNoches" />
+                                                                        <input id="@String.Format("niños{0}", @i)" value="@Model[i].NroNiños" />
+                                                                        <input id="@String.Format("adultos{0}", @i)" value="@Model[i].NroAdultos" />
+                                                                        <input id="@String.Format("montoC{0}", @i)" value="@Model[i].montoCertificado" />
+                                                                        <input id="@String.Format("obser{0}", @i)" value="@Model[i].Observaciones" />
+
+                                                                        <input id="@String.Format("fres{0}", @i)" value="@Model[i].fReserva" />
+                                                                        <input id="@String.Format("fvcli{0}", @i)" value="@Model[i].fViajeCliente" />
+
+                                                                        <input id="@String.Format("montoP{0}", @i)" value="@Model[i].MontoPagar" />
+                                                                        <input id="@String.Format("cedulaC{0}", @i)" value="@Model[i].cedulaCliente" />
+                                                                        <input id="@String.Format("nbA{0}", @i)" value="@Model[i].nbAcompañante" />
+                                                                        <input id="@String.Format("cAc{0}", @i)" value="@Model[i].cedulaAc" />
+
+                                                                    </td>
+                                                                </tr>
+                                                            }
+                                                            else
+                                                            {
+                                                                <tr style="background-color: #01A9DB; color: white;" class="odd gradeX">
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td> TOTAL DE PAGO </td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td>@String.Format("{0:N}", decimal.Parse(Convert.ToString(Total)))</td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td hidden></td>
+                                                                    <td hidden></td>
+
+                                                                </tr>
+                                                            }
+                                                        }
+                                                    }
+
+                                                </tbody>
+                                            </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                 </div>
+            <footer class="footer-1" id="footer">
+                <div class="vd_bottom">
+                    <div class="container">
+                        <div class="row">
+                            <div class=" col-xs-12">
+                                <div style="margin-left:-18%" class="copyright">
+                                    Copyright &copy;2016 SUNSOL HOTELES. Todos los Derechos Reservados
+                                </div>
+                            </div>
+                        </div><!-- row -->
+                    </div><!-- container -->
+                </div>
+            </footer>
+               </div>
+
+
+
+            </div>
+
+
+
+            <script src="~/Scripts/dataTables.bootstrap.min.js"></script>
+            @*<script src="~/Scripts/jquery.min.js"></script>*@
+            <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Content/js/jquery-3.0.0.min.js"></script>
+            <script src="~/Scripts/jquery.dataTables.min.js"></script>
+            <script src="~/Content/js/PopUp.js"></script>
+            <script src="~/Content/dist/sweetalert.min.js"></script>
+            <script src="~/Content/js/Search.js"></script>
+            <script src="~/Content/js/CargarTablas.js"></script>
+            <script src="~/Content/js/Validaciones.js"></script>
+    <script src="~/Content/js/SaveData.js"></script>
+            <script src="~/Content/dist/sweetalert.min.js"></script>
+            <script src="~/Content/js/DobleClick.js"></script>
+            <script>
+                $('#example').dataTable({
+                    "bPaginate": true,
+                    "bLengthChange": true,
+                    "bFilter": true,
+                    "bSort": true,
+                    "bInfo": true,
+                    "bAutoWidth": true,
+                    "asStripClasses": null
+                });
+            </script>
+</body>
+</html>

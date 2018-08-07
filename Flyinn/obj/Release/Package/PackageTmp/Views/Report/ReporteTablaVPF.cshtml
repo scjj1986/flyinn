@@ -1,0 +1,70 @@
+﻿@model List<Flyinn.Models.VolProgFlyinn>
+
+@{
+    //var style = "";
+    double MontoTotal = 0.00;
+}
+
+<table class="table table-striped table-bordered table-hover" id="example-VPF">
+    <thead>
+        <tr>
+            <th class="center col-xs-1">Nr. Contrato</th>
+            <th class="center col-xs-1">Cédula Cliente</th>
+            <th class="center col-xs-1">Nombre y Apellido</th>
+            <th class="center col-xs-2">Monto Contrato</th>
+            <th class="center col-xs-2">Fecha de Creación</th>
+            <th class="center col-xs-1">Estado</th>
+            <th class="center col-xs-1">Estatus</th>
+            <th class="center col-xs-2">Fecha Procesable</th>
+            <th class="center col-xs-1">Descripción</th>
+
+        </tr>
+    </thead>
+    <tbody id="last">
+        @if (@Model != null)
+        {
+            for (int i = 0; i < @Model.Count; i++)
+            {
+                <tr class="odd gradeX">
+                    <td>@Model[i].nrocontrato</td>
+                    <td>@Model[i].cedula_rif</td>
+                    <td>@Model[i].nombre</td>
+                    <td>@String.Format("{0:N}", (decimal.Parse(@Model[i].montocontrato))) Bs.</td>
+                    <td>@Model[i].fechacreacion</td>
+                    <td>@Model[i].estado</td>
+                    <td>@Model[i].estatus</td>
+                    <td>@Model[i].fechacreacion</td>
+                    <td>@Model[i].descripcion</td>
+                </tr>
+            
+                MontoTotal = MontoTotal + Convert.ToDouble(Model[i].montocontrato);
+
+            }
+        }
+
+    </tbody>
+    
+</table>
+
+<p><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Monto Total:&nbsp;&nbsp; </b>@String.Format("{0:N}", MontoTotal) Bs.</p>
+
+
+
+
+
+@*
+<script type="text/javascript">
+
+    $('#example-VPF').dataTable({
+        "bPaginate": true,
+        "bLengthChange": true,
+        "bFilter": true,
+        "pageLength": 50,
+        "bSort": true,
+        "bInfo": true,
+        "bAutoWidth": true,
+        "asStripClasses": null
+    });
+</script>*@
+
+

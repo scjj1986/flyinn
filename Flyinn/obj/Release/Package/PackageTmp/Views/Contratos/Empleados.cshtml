@@ -1,0 +1,162 @@
+﻿@model List<Flyinn.Models.Empleado>
+
+<form id="users" method="post" action="#" enctype="multipart/form-data">
+    <div class="col-sm-12" style="margin-left: 18%">
+        <div class="col-lg-12">
+            <div class="panel-heading">
+                <div class="text-muted bootstrap-admin-box-title" style="font-weight:bold; float:left;">Nuevo Empleado</div>
+            </div>
+        </div>
+        <div style="margin-left:15%">
+            <div class="alert alert-danger vd_hidden" style="display:none; width:80%" id="oculto">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="glyphicon glyphicon-remove"></i></button>
+                <span class="vd_alert-icon"><i class="glyphicon glyphicon-exclamation-sign vd_red"></i></span><strong>Importante!</strong> Estos Campos se encuentran Vacios o estan Incorrectos: <label style="color:red" id="error"></label>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="col-sm-2" style:"margin-top:20px">
+                <div class="row mgbt-xs-0">
+                    <!--CODIGO-->
+                    <label class="col-xs-7 control-label" style="margin-top:10px">Codigo</label>
+                    <div class="col-xs-8 controls">
+                        <input id="CodigoEmpleado" type="text" name="CodigoEmpleado" onkeyup="this.value = this.value.toUpperCase();" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2" style:"margin-top:20px">
+                <div class="row mgbt-xs-0">
+                    <!--CEDULA-->
+                    <label class="col-xs-7 control-label" style="margin-top:10px">Cédula</label>
+                    <div class="col-xs-8 controls">
+                        <input id="Cedula" type="text" name="Cedula" maxlength="8" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2" style:"margin-top:20px">
+                <div class="row mgbt-xs-0">
+                    <!--nombre del Empleado-->
+                    <label class="col-xs-7 control-label" style="margin-top:10px">Nombre</label>
+                    <div class="col-xs-10 controls">
+                        <input id="Nombres" type="text" name="Nombres" onkeyup="this.value = this.value.toUpperCase();" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2" style:"margin-top:20px">
+                <div class="row mgbt-xs-0">
+                    <!--Correo empleado-->
+                    <label class="col-xs-7 control-label" style="margin-top:10px">Correo</label>
+                    <div class="col-xs-12 controls">
+                        <input id="Email" type="text" name="Email" onkeyup="this.value = this.value.toUpperCase();" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+
+            <div class="col-sm-2" style:"margin-top:20px">
+                <div class="row mgbt-xs-0">
+                    <!--Cargos-->
+                    <label class="col-xs-7 control-label" style="margin-top:10px">Cargos</label>
+                    <div class="col-xs-10 controls">
+                        @Html.DropDownList("CodigoCargo", (SelectList)ViewData["Cargo"], new { @style = "width:110%" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-2" style:"margin-top:20px">
+                <div class="row mgbt-xs-0">
+                    <!--Programas-->
+                    <label class="col-xs-7 control-label" style="margin-top:10px">Programas</label>
+                    <div class="col-xs-11 controls">
+                        @Html.DropDownList("CodigoPrograma", (SelectList)ViewData["Programas"], new { @style = "width:110%" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2" style:"margin-top:20px">
+                <div class="row mgbt-xs-0">
+                    <!--Activo-->
+                    <label class="col-xs-7 control-label" style="margin-top:10px">Activo</label>
+                    <div class="col-xs-8 controls">
+                        <input type="checkbox" name="activo" id="activo" onclick="checkbox(this)" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-lg-12" style="margin-top:1%">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div id="tablaUser" style="margin-top:1%; overflow:scroll; width:100%; height:400px" class="col-lg-12">
+                    <table id="tabla_user" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th class="center">Codigo</th>
+                                <th class="center">Nombre</th>
+                                <th class="center">Cedula</th>
+                                <th class="center">Cargo</th>
+                                <th class="center">Programa</th>
+                                <th class="center">Correo</th>
+                                <th class="center">Activo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (@Model != null)
+                            {
+                                for (int i = 0; i <= @Model.Count - 1; i++)
+                                {
+
+                                    <tr class="odd gradeX" id="@Model[i]" ondblclick="UploadEmpleados(@i)">
+                                        <td class="center col-sm-1">@Model[i].CodigoEmpleado</td>
+                                        <td class="center">@Model[i].Nombres</td>
+                                        <td class="center">@Model[i].Cedula</td>
+                                        <td class="center">@Model[i].Cargo.Descripcion</td>
+                                        <td class="center">@Model[i].Programa.Descripcion</td>
+                                        <td class="center">@Model[i].Email</td>
+                                        <td class="center">@Model[i].Estado</td>
+
+                                        <td hidden>
+                                            <input id="@String.Format("codigo{0}",@i)" value="@Model[i].CodigoEmpleado" />
+                                            <input id="@String.Format("nombre{0}", @i)" value="@Model[i].Nombres" />
+                                            <input id="@String.Format("cedula{0}", @i)" value="@Model[i].Cedula" />
+                                            <input id="@String.Format("codCargo{0}", @i)" value="@Model[i].Cargo.CodigoCargo" />
+                                            <input id="@String.Format("codPrograma{0}", @i)" value="@Model[i].Programa.CodigoPrograma" />
+                                            <input id="@String.Format("correo{0}", @i)" value="@Model[i].Email" />
+                                            <input id="@String.Format("ID{0}", @i)" value="@Model[i].idEmpleado" />
+                                            <input id="@String.Format("act{0}", @i)" value="@Model[i].activo" />
+
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <input hidden id="ID" name="ID" type="text" />
+        </div>
+     </div>
+      
+        <div id="botonModificar" class="col-sm-9" style="margin-left:10%; margin-top:-1.1%; display:none;">
+            <div class="row mgbt-xs-0">
+                <div class="text-center vd_info-parent">
+                    <button type="button" class="btn btn-info" style="width:10%; height:5%" id="btnuevo" onclick="limpiar(),ShowControlesUsuarios()"><i class="glyphicon glyphicon-plus-sign"></i> Nuevo</button>
+                    <button type="button" class="btn btn-info" style="width:10%; height:5%" id="modificar_usuarios" onclick="InsertarEmpleado('modificar_empleados')"><i class="glyphicon glyphicon-floppy-disk"></i> Modificar </button>
+                    <button type="button" class="btn btn-info" style="width:10%; height:5%" id="popup_cancel1" onclick="popup('popUpDiv1')"><i class="glyphicon glyphicon-remove-sign"></i> Cancelar </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="botonGuardar" class="col-sm-9" style="margin-left:10%; margin-top:-1.1%">
+            <div class="row mgbt-xs-0">
+                <div class="text-center vd_info-parent">
+                    <button type="button" class="btn btn-info" style="width:10%; height:5%" id="btnuevo" onclick="limpiar(),ShowControlesUsuarios()"><i class="glyphicon glyphicon-plus-sign"></i> Nuevo</button>
+                    @* @Ajax.ActionLink("Guardar Usuario ", "RefrescarCrearUsuarios", new { }, new AjaxOptions { UpdateTargetId = "tabla_user" }, new { @onclick = ("InsertarUsuarios('insertar_usuarios')"), @title = "Guardar Usuario", @class = "btn btn-success glyphicon glyphicon-disk" })*@
+                    <button type="button" class="btn btn-info" style="width:10%; height:5%" id="insertar_usuarios" onclick="InsertarEmpleado('insertar_empleados')"><i class="glyphicon glyphicon-floppy-disk"></i> Guardar </button>
+                    <button type="button" class="btn btn-info" style="width:10%; height:5%" id="popup_cancel" onclick="popup('popUpDiv1')"><i class="glyphicon glyphicon-remove-sign"></i> Cancelar </button>
+                </div>
+            </div>
+        </div>
+</form>
+<script src="~/Content/js/DobleClick.js"></script>

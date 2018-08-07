@@ -1,0 +1,207 @@
+﻿@model List<Flyinn.Models.Contratos>
+
+@{
+    var style = "";
+    double totalP = 0.00, totalG = 0.00, totalS = 0.00, totalC = 0.00, Total = 0.00;
+}
+
+
+
+
+@*<div class="form-group pull-right">
+        <input type="text" class="search form-control" placeholder="Buscar">
+    </div>*@
+<table id="example" class="table table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th class="center">Fecha Venta</th>
+            <th class="center col-md-10">Nombres</th>
+            <th class="center">Cedula</th>
+            <th class="center">Certificado</th>
+            <th class="center ">Nro. Contrato</th>
+            <th class="center">Precio Contrato</th>
+            <th class="center ">Fecha Procesable</th>
+            <th class="center">Programa</th>
+            <th class="center">Promotor</th>
+            <th class="center">Estatus</th>
+            <th class="center">0,40%</th>
+            <th class="center">Gerente</th>
+            <th class="center">Estatus</th>
+            <th class="center">0,50%</th>
+            <th class="center">Supervisor</th>
+            <th class="center">Estatus</th>
+            <th class="center">0,50%</th>
+            <th class="center">Coordinador</th>
+            <th class="center">Estatus</th>
+            <th class="center">0,20%</th>
+            <th class="center col-xs-1">Total a Pagar</th>
+            <th class="center">Fecha Reserva</th>
+            <th class="center">Fecha Viaje Cliente</th>
+            <th hidden></th>
+            <th hidden></th>
+
+        </tr>
+
+    </thead>
+    <tbody id="last">
+        @if (@Model != null)
+        {
+            for (int i = 0; i <= @Model.Count; i++)
+            {
+                if (i != @Model.Count)
+                {
+                    if (@Model[i].Indicador == 0) { style = "font-weight:bolder"; } else { style = ""; }
+
+                    <tr style="@style" class="odd gradeX" id="@Model[i].NroContrato" ondblclick="mdfEmpleado(@i)">
+
+                        <td>@Model[i].FechaCreacion.ToShortDateString()</td>
+                        <td class="col-md-10">@String.Format("{0} {1}", @Model[i].Cliente.Nombres, @Model[i].Cliente.Apellidos)</td>
+                        <td>@Model[i].Cliente.cedula</td>
+                        <td>@Model[i].Certificado.CodigoCertificado</td>
+                        <td>@Model[i].NroContrato</td>
+                        <td>@String.Format("{0:N}", decimal.Parse(String.Format("{0:0.00}", @Model[i].MontoContrato)))</td>
+                        <td>@Model[i].FechaProcesable.ToShortDateString()</td>
+                        <td>@Model[i].Programa.Descripcion</td>
+                        <td>@Model[i].Promotor.Nombres</td>
+                        <td>@Model[i].Promotor.nbEstatus</td>
+                        <td>@String.Format("{0:N}", decimal.Parse(String.Format("{0:0.00}", @Model[i].Comisiones.ComisionPromotor)))</td>
+                        <td>@Model[i].Gerente.Nombres</td>
+                        <td>@Model[i].Gerente.nbEstatus</td>
+                        <td>@String.Format("{0:N}", decimal.Parse(String.Format("{0:0.00}", @Model[i].Comisiones.ComisionGerente)))</td>
+                        <td>@Model[i].Supervisor.Nombres</td>
+                        <td>@Model[i].Supervisor.nbEstatus</td>
+                        <td>@String.Format("{0:N}", decimal.Parse(String.Format("{0:0.00}", @Model[i].Comisiones.ComisionSupervisor)))</td>
+                        <td>@Model[i].Coordinador.Nombres</td>
+                        <td>@Model[i].Coordinador.nbEstatus</td>
+                        <td>@String.Format("{0:N}", decimal.Parse(String.Format("{0:0.00}", @Model[i].Comisiones.ComisionCoordinador)))</td>
+                        <td>@String.Format("{0:N}", decimal.Parse(String.Format("{0:0.00}", @Model[i].Comisiones.MontoTotal)))</td>
+                        <td>@Model[i].fReserva</td>
+                        <td>@Model[i].fViajeCliente</td>
+                        <td hidden>
+                            <div hidden>
+                                @{
+                    totalP += @Model[i].Comisiones.ComisionPromotor;
+                    totalG += @Model[i].Comisiones.ComisionGerente;
+                    totalS += @Model[i].Comisiones.ComisionSupervisor;
+                    totalC += @Model[i].Comisiones.ComisionCoordinador;
+                    Total += @Model[i].Comisiones.ComisionCoordinador + @Model[i].Comisiones.ComisionSupervisor + @Model[i].Comisiones.ComisionGerente + @Model[i].Comisiones.ComisionPromotor;
+                                }
+                            </div>
+                        </td>
+                        <td hidden>
+                            <div hidden>
+                                <input id="@String.Format("IP{0}",@i)" value="@Model[i].Promotor.idEmpleado" />
+                                <input id="@String.Format("EP{0}",@i)" value="@Model[i].Promotor.idEstatus" />
+                                <input id="@String.Format("IG{0}",@i)" value="@Model[i].Gerente.idEmpleado" />
+                                <input id="@String.Format("EG{0}",@i)" value="@Model[i].Gerente.idEstatus" />
+                                <input id="@String.Format("IC{0}",@i)" value="@Model[i].Coordinador.idEmpleado" />
+                                <input id="@String.Format("EC{0}",@i)" value="@Model[i].Coordinador.idEstatus" />
+                                <input id="@String.Format("IS{0}",@i)" value="@Model[i].Supervisor.idEmpleado" />
+                                <input id="@String.Format("ES{0}",@i)" value="@Model[i].Supervisor.idEstatus" />
+                                <input id="@String.Format("CC{0}",@i)" value="@Model[i].Certificado.idCertificado" />
+                                <input id="@String.Format("CDC{0}",@i)" value="@Model[i].Certificado.CodigoCertificado" />
+                                <input id="@String.Format("NC{0}",@i)" value="@Model[i].NroContrato" />
+                                <input id="@String.Format("NB{0}",@i)" value="@String.Format("{0} {1}", @Model[i].Cliente.Nombres, @Model[i].Cliente.Apellidos)" />
+                                <input id="@String.Format("FV{0}",@i)" value="@Model[i].FechaCreacion.ToShortDateString()" />
+                                <input id="@String.Format("FP{0}",@i)" value="@Model[i].FechaProcesable.ToShortDateString()" />
+                                <input id="@String.Format("MC{0}",@i)" value="@String.Format("{0:0.00}", (Math.Truncate(@Model[i].MontoContrato * 100) / 100))" />
+                            </div>
+
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    <tr style="background-color: #01A9DB; color: white;" class="odd gradeX">
+                        <td hidden>@DateTime.Now.ToShortDateString()</td>
+                        <td></td>
+                        <td> TOTALES DE PAGO </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>@String.Format("{0:N}", decimal.Parse(Convert.ToString(@totalP)))</td>
+                        <td></td>
+                        <td></td>
+                        <td>@String.Format("{0:N}", decimal.Parse(Convert.ToString(@totalG)))</td>
+                        <td></td>
+                        <td></td>
+                        <td>@String.Format("{0:N}", decimal.Parse(Convert.ToString(@totalS)))</td>
+                        <td></td>
+                        <td></td>
+                        <td>@String.Format("{0:N}", decimal.Parse(Convert.ToString(@totalC)))</td>
+                        <td>@String.Format("{0:N}", decimal.Parse(Convert.ToString(@Total)))</td>
+                        <td></td>
+                        <td></td>
+                        <td hidden></td>
+                        <td hidden></td>
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+</table>
+
+
+
+<script type="text/javascript">
+    //$('tr ').on('dblclick', function () {
+    //    $('#asociarCertificados').modal('show');
+    //});
+    $('tr').dblclick(function () {
+        $('#asociarCertificados').modal('show');
+    })
+
+</script>
+<script type="text/javascript">
+
+    $('#example').dataTable({
+        "bPaginate": true,
+        "bLengthChange": true,
+        "bFilter": true,
+        "pageLength": 100,
+        "bSort": true,
+        "bInfo": true,
+        "bAutoWidth": true,
+        "asStripClasses": null
+    });
+</script>
+@*<script type="text/javascript">
+        $(document).ready(function () {
+            $(".search").keyup(function () {
+                var searchTerm = $(".search").val();
+                var listItem = $('.results tbody').children('tr');
+                var searchSplit = searchTerm.replace(/ /g, "'):containsi('")
+
+                $.extend($.expr[':'], {
+                    'containsi': function (elem, i, match, array) {
+                        return (elem.textContent || elem.innerText || '').toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+                    }
+                });
+
+                $(".results tbody tr").not(":containsi('" + searchSplit + "')").each(function (e) {
+                    $(this).attr('visible', 'false');
+                });
+
+                $(".results tbody tr:containsi('" + searchSplit + "')").each(function (e) {
+                    $(this).attr('visible', 'true');
+                });
+
+                var jobCount = $('.results tbody tr[visible="true"]').length;
+                $('.counter').text(jobCount + ' item');
+
+                if (jobCount == '0') { $('.no-result').show(); }
+                else { $('.no-result').hide(); }
+            });
+        });
+
+    </script>*@
+@*<script src="~/Scripts/jquery.dataTables.min.js"></script>*@
+@*<script src="~/Scripts/dataTables.bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>*@
+

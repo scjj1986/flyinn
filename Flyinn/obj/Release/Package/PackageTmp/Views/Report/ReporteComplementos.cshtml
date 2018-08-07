@@ -1,0 +1,139 @@
+﻿@model List<Flyinn.Models.Complementos>
+<html>
+<head>
+    <title></title>
+    @*<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">*@
+    @* <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>*@
+    @* <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>*@
+    @*<link href="~/Content/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />*@
+    @*<link href="~/Content/assets/bootstrap-table/src/bootstrap-table.css" rel="stylesheet" />
+        <link rel="stylesheet" href="../assets/examples.css">
+        <script src="~/Content/assets/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+        <script src="~/Content/assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="~/Content/assets/bootstrap-table/src/bootstrap-table.js"></script>
+        <script src="~/Content/assets/ga.js"></script>*@
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.1/bootstrap-table.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.1/bootstrap-table.min.js"></script>
+    <script src="~/Content/js/Check.js"></script>
+</head>
+<body>
+   
+    @*<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#Complementos">Open Modal</button>
+            <div class="container">
+
+        <div class="modal fade" id="Complementos" role="dialog">
+                       <div class="modal-dialog">
+                           <div class="modal-content">
+                               <div class="modal-header">
+                                   <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                   <h4 class="modal-title">Complementos Flyinn</h4>
+                               </div>*@
+
+    @*<div class="modal-body">*@
+    @*<div class="row">
+            <div class="col-md-3 col-md-offset-1">
+                <label id="fechIni" class="control-label">Fecha Inicio</label>
+                <input class="control" type="date" id="fechaInicio" name="fechaInicio" />
+            </div>
+            <div class="col-md-4 col-md-offset-3">
+                <label id="fechFin" class="control-label">Fecha Fin</label>
+                <input class="control" type="date" id="fechaFin" name="fechaFin" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-5 col-md-offset-5">
+                <button class="btn btn-info btn-sm" type="button" id="btnConsultar" name="btnConsultar">Consultar</button>
+            </div>
+        </div>*@
+    <table id="tbComplemento" data-toggle="table" data-toolbar="#toolbar" data-height="460">
+        <thead>
+            <tr>
+              
+                <th data-field="NroContrato">Nro Contrato</th>
+                <th data-field="Fecha" >Fecha procesable complemento</th>
+                <th data-field="ComisionCoordinador">Comisión Coordinador Bs.</th>
+                <th data-field="Porcentaje">Porcentaje</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var datos in Model)
+                {
+                    <tr>
+                       
+                        <td>@datos.NroContrato</td>
+                        <td>@datos.Fecha.ToShortDateString()</td>
+
+                        @*
+
+                        <td align="right">@String.Format("{0:0.00}", (Math.Truncate(@datos.comisionCoordinador)))</td>
+                        <td>@String.Format("{0:0.00}", (Math.Round(@datos.PorcCoordinador, 2)))</td>
+                        *@
+                        <td align="right">@String.Format("{0:N}", decimal.Parse(String.Format("{0:0.00}", @datos.comisionCoordinador)))</td>
+
+                        
+
+                        <td>@String.Format("{0:N}", decimal.Parse(String.Format("{0:0.00}", @datos.PorcCoordinador)))</td>
+
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <script type="text/javascript">
+        /* var list = [];
+         $("#tbComplemento").on("check.bs.table", function (e, row) {
+             list.push({ NroContrato: row.NroContrato, Fecha: row.Fecha, MontoContrato: row.MontoContrato, Porcentaje: row.Porcentaje });
+             alert(list)
+             console.log(list);
+         });
+
+         $('#tbComplemento').on('uncheck.bs.table', function (e, row) {
+             $.each(list, function (index, value) {
+                 if (value.NroContrato == row.NroContrato) {
+                     list.splice(index, 1);
+                 }
+             });
+             alert('hola mundo')
+             console.log(list);
+         });
+
+         //$("#btnConsultar").click(function () {
+            // $("#output").empty();
+             $.each(list, function (index, value) {
+                 //$('#output').append($('<li></li>').text(value.NroContrato + " | " + value.name + " | " + value.forks));
+                 alert(value.NroContrato+"-"+value.Fecha);
+             });
+        // });*/
+    </script>
+    @*<div class="row">
+            <div class="col-md-5 col-md-offset-5">
+                <button class="btn btn-info btn-sm" type="button" id="btnConsultar" name="btnConsultar">Procesar</button>
+            </div>
+        </div>*@
+    @*</div>*@
+    @*</div>
+                   </div>
+            </div>
+        </div>*@
+    @*<script>
+            var $table = $('#table'),
+                $button = $('#button'),
+                $button2 = $('#button2');
+            $(function () {
+                $button.click(function () {
+                    $table.bootstrapTable('checkAll');
+                });
+                $button2.click(function () {
+                    $table.bootstrapTable('uncheckAll');
+                });
+            });
+        </script>*@
+</body>
+</html>
